@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('tropleindoApp', [
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'ngRoute'
+	'ngCookies',
+	'ngResource',
+	'ngSanitize',
+	'ngRoute'
 ]);
 
 angular.module('tropleindoApp').config(function ($routeProvider) {

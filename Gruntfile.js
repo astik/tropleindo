@@ -75,7 +75,8 @@ module.exports = function (grunt) {
             '<%= yeoman.tmp %>',
             '<%= yeoman.app %>',
             'bower_components',
-            'bower_components/bootstrap'
+            'bower_components/bootstrap',
+            'mock'
           ]
         }
       },
