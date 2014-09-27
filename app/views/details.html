@@ -26,16 +26,20 @@
             <span data-ng-if="!measure.isEditing">
                 {{measure.timestamp | date:'dd/MM/yyyy HH:mm'}}
             </span>
+
             <div class="form-group form-group-sm" data-ng-if="measure.isEditing">
                 <label class="sr-only" for="newTimestamp">New measure</label>
-                <input type="text" class="form-control" id="newTimestamp" placeholder="xx"
-                       data-ng-model="measure.newTimestamp" min="0" max="100" required>
+                <input type="datetime" class="form-control" id="newTimestamp" placeholder="xx"
+                       data-ng-model="measure.newTimestamp" min="0" max="100"
+                       data-date-time data-format="dd/MM/yyyy HH:mm"
+                       required>
             </div>
         </td>
         <td>
             <span data-ng-if="!measure.isEditing">
                 {{measure.value}}%
             </span>
+
             <div class="form-group form-group-sm" data-ng-if="measure.isEditing">
                 <label class="sr-only" for="newValue">New measure</label>
                 <input type="number" class="form-control" id="newValue" placeholder="xx"
@@ -44,18 +48,18 @@
         </td>
         <td>
             <div class="btn-group">
-                <button data-ng-click="save(measure)" class="btn btn-danger btn-sm" data-ng-if="measure.newTimestamp">
+                <button data-ng-click="save(measure)" class="btn btn-danger btn-sm" data-ng-if="measure.isEditing">
                     <span class="glyphicon glyphicon-floppy-save"></span>
                 </button>
                 <button data-ng-click="cancel(measure)" class="btn btn-primary btn-sm"
-                        data-ng-if="measure.newTimestamp">
+                        data-ng-if="measure.isEditing">
                     <span class="glyphicon glyphicon-backward"></span>
                 </button>
-                <button data-ng-click="edit(measure)" class="btn btn-primary btn-sm" data-ng-if="!measure.newTimestamp">
+                <button data-ng-click="edit(measure)" class="btn btn-primary btn-sm" data-ng-if="!measure.isEditing">
                     <span class="glyphicon glyphicon-edit"></span>
                 </button>
                 <button data-ng-click="deleteSpotMeasure(spot, measure)" class="btn btn-sm btn-danger"
-                        data-ng-if="!measure.newTimestamp">
+                        data-ng-if="!measure.isEditing">
                     <span class="glyphicon glyphicon-trash"></span>
                 </button>
             </div>

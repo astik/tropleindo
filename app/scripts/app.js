@@ -6,7 +6,8 @@ angular.module('tropleindoApp', [
 	'ngSanitize',
 	'ngRoute',
 	'angularCharts',
-	'ngStorage'
+	'ngStorage',
+	'datePicker'
 ]);
 
 angular.module('tropleindoApp').config(function ($routeProvider) {

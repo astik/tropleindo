@@ -30,13 +30,13 @@ angular.module('tropleindoApp').controller('DetailsCtrl', function ($scope, $rou
 	});
 
 	$scope.edit = function (measure) {
-		measure.newTimestamp = measure.timestamp;
+		measure.newTimestamp = new Date(parseInt(measure.timestamp, 10));
 		measure.newValue = measure.value;
 		measure.isEditing = true;
 	};
 
 	$scope.save = function (measure) {
-		measure.timestamp = measure.newTimestamp;
+		measure.timestamp = measure.newTimestamp.getTime();
 		measure.value = measure.newValue;
 		delete measure.isEditing;
 		delete measure.newValue;
