@@ -17,6 +17,10 @@ angular.module('tropleindoApp').config(function ($routeProvider) {
 			templateUrl: 'views/new.html',
 			controller: 'NewCtrl'
 		})
+		.when('/details/:spotName', {
+			templateUrl: 'views/details.html',
+			controller: 'DetailsCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		})
