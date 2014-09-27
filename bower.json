@@ -1,21 +1,22 @@
 {
-  "name": "tropleindo",
-  "version": "0.0.0",
-  "dependencies": {
-    "angular": "1.3.0-rc.3",
-    "angular-resource": "1.3.0-rc.3",
-    "angular-cookies": "1.3.0-rc.3",
-    "angular-sanitize": "1.3.0-rc.3",
-    "angular-animate": "1.3.0-rc.3",
-    "angular-route": "1.3.0-rc.3",
-    "angular-postman": "1.0.2",
-    "angular-datepicker": "1.0.3",
-    "bootstrap": "3.2.0",
-    "angular-combine": "0.1.1",
-    "angular-charts": "0.2.6"
-  },
-  "devDependencies": {
-    "angular-mocks": "1.3.0-rc.3",
-    "angular-scenario": "1.3.0-rc.3"
-  }
+	"name": "tropleindo",
+	"version": "0.0.0",
+	"private": true,
+	"dependencies": {
+		"angular": "1.3.0-rc.3",
+		"angular-resource": "1.3.0-rc.3",
+		"angular-cookies": "1.3.0-rc.3",
+		"angular-sanitize": "1.3.0-rc.3",
+		"angular-animate": "1.3.0-rc.3",
+		"angular-route": "1.3.0-rc.3",
+		"angular-postman": "1.0.2",
+		"angular-datepicker": "1.0.3",
+		"bootstrap": "3.2.0",
+		"angular-combine": "0.1.1",
+		"angular-charts": "0.2.6"
+	},
+	"devDependencies": {
+		"angular-mocks": "1.3.0-rc.3",
+		"angular-scenario": "1.3.0-rc.3"
+	}
 }
