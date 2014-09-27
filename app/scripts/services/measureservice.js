@@ -1,31 +1,31 @@
 'use strict';
 
-angular.module('tropleindoApp').factory('measureService', function ($http, $log) {
-
-	// quick and dirty for now ... kind of a mock ...
-	var measures;
-	var measuresHttpPromise = $http.get('measures.json').then(function (data) {
-		measures = data.data;
+angular.module('tropleindoApp').factory('measureService', function ($http, $log, $localStorage, $q) {
+	var storage = $localStorage.$default({
+		measures: []
 	});
+	var measures = storage.measures;
+
 	var retrieveMeasures = function () {
 		$log.debug('retrieveMeasures');
-		return measuresHttpPromise.then(function () {
-			return measures;
-		});
+		var deferred = $q.defer();
+		deferred.resolve(measures);
+		return deferred.promise;
 	};
+
 	var deleteSpot = function (spotName) {
 		$log.debug('deleteSpot');
-		return measuresHttpPromise.then(function () {
-			var i, l, spot, indexToRemove;
-			for (i = 0, l = measures.length; i < l; i++) {
-				spot = measures[i];
-				if (spot.spotName === spotName) {
-					indexToRemove = i;
-				}
+		var deferred = $q.defer();
+		var i, l, spot, indexToRemove;
+		for (i = 0, l = measures.length; i < l; i++) {
+			spot = measures[i];
+			if (spot.spotName === spotName) {
+				indexToRemove = i;
 			}
-			measures.splice(indexToRemove, 1);
-			return measures;
-		});
+		}
+		measures.splice(indexToRemove, 1);
+		deferred.resolve(measures);
+		return deferred.promise;
 	};
 
 
