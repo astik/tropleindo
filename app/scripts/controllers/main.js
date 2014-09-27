@@ -6,7 +6,9 @@ angular.module('tropleindoApp').controller('MainCtrl', function ($scope, measure
 	});
 
 	$scope.addMeasure = function (spot) {
-		measureService.addMeasure(spot.spotName, spot.newMeasure);
+		if (spot.newMeasure) {
+			measureService.addMeasure(spot.spotName, spot.newMeasure);
+		}
 	};
 
 	$scope.deleteSpot = function (spot) {

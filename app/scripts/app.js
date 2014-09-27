@@ -4,7 +4,8 @@ angular.module('tropleindoApp', [
 	'ngCookies',
 	'ngResource',
 	'ngSanitize',
-	'ngRoute'
+	'ngRoute',
+	'angularCharts'
 ]);
 
 angular.module('tropleindoApp').config(function ($routeProvider) {
