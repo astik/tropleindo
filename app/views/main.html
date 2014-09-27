@@ -14,8 +14,13 @@
             {{spot.spotName}}
         </th>
         <td>
-            {{spot.measures[spot.measures.length - 1].value}}%
-            ({{spot.measures[spot.measures.length - 1].timestamp | date:'dd/MM/yyyy HH:mm'}})
+            <span data-ng-if="spot.measures.length">
+                {{spot.measures[spot.measures.length - 1].value}}%
+                ({{spot.measures[spot.measures.length - 1].timestamp | date:'dd/MM/yyyy HH:mm'}})
+            </span>
+            <span data-ng-if="!spot.measures.length">
+                No measure
+            </span>
         </td>
         <td>
             <form class="form-inline" data-ng-submit="addMeasure(spot)">
@@ -24,15 +29,18 @@
                     <input type="number" class="form-control" id="newMeasure{{$index}}" placeholder="xx"
                            data-ng-model="spot.newMeasure" min="0" max="100" required>
                 </div>
-                <button type="submit" class="btn btn-default btn-sm">Add measure</button>
+                <button type="submit" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Add measure
+                </button>
             </form>
         </td>
         <td>
             <div class="btn-group">
-                <a data-ng-href="#/details/{{spot.spotName}}" class="btn btn-primary btn-lg">
+                <a data-ng-href="#/details/{{spot.spotName}}" class="btn btn-primary btn-sm">
                     <span class="glyphicon glyphicon-signal"></span>
                 </a>
-                <button data-ng-click="deleteSpot(spot)" class="btn btn-lg btn-danger">
+                <button data-ng-click="deleteSpot(spot)" class="btn btn-sm btn-danger">
                     <span class="glyphicon glyphicon-trash"></span>
                 </button>
             </div>
@@ -40,4 +48,7 @@
     </tr>
     </tbody>
 </table>
-<a data-ng-href="#/new" class="btn btn-default">New spot</a>
+<a data-ng-href="#/new" class="btn btn-default">
+    <span class="glyphicon glyphicon-plus"></span>
+    New spot
+</a>

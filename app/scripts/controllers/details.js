@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('tropleindoApp').controller('DetailsCtrl', function ($scope, $routeParams, $filter, measureService) {
+angular.module('tropleindoApp').controller('DetailsCtrl', function ($scope, $routeParams, $filter, $window, measureService) {
 	var spotName = $routeParams.spotName;
-	console.log(spotName);
+
 	measureService.getSpotByName(spotName).then(function (spot) {
 		$scope.spot = spot;
 
@@ -28,4 +28,30 @@ angular.module('tropleindoApp').controller('DetailsCtrl', function ($scope, $rou
 			}
 		};
 	});
+
+	$scope.edit = function (measure) {
+		measure.newTimestamp = measure.timestamp;
+		measure.newValue = measure.value;
+		measure.isEditing = true;
+	};
+
+	$scope.save = function (measure) {
+		measure.timestamp = measure.newTimestamp;
+		measure.value = measure.newValue;
+		delete measure.isEditing;
+		delete measure.newValue;
+		delete measure.newTimestamp;
+	};
+
+	$scope.cancel = function (measure) {
+		delete measure.isEditing;
+		delete measure.newValue;
+		delete measure.newTimestamp;
+	};
+
+	$scope.deleteSpotMeasure = function (spot, measure) {
+		if ($window.confirm('Are you sure you want to delete this measure ?')) {
+			measureService.deleteSpotMeasure(spot.spotName, measure);
+		}
+	};
 });

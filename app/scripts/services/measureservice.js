@@ -16,10 +16,9 @@ angular.module('tropleindoApp').factory('measureService', function ($http, $log,
 	var deleteSpot = function (spotName) {
 		$log.debug('deleteSpot');
 		var deferred = $q.defer();
-		var i, l, spot, indexToRemove;
+		var i, l, indexToRemove;
 		for (i = 0, l = measures.length; i < l; i++) {
-			spot = measures[i];
-			if (spot.spotName === spotName) {
+			if (measures[i].spotName === spotName) {
 				indexToRemove = i;
 			}
 		}
@@ -67,7 +66,7 @@ angular.module('tropleindoApp').factory('measureService', function ($http, $log,
 		});
 	};
 
-	api.addMeasure = function (spotName, measure) {
+	api.addSpotMeasure = function (spotName, measure) {
 		$log.debug('addMeasure');
 		return api.getSpotByName(spotName).then(function (spot) {
 			spot.measures.push({
@@ -83,6 +82,21 @@ angular.module('tropleindoApp').factory('measureService', function ($http, $log,
 		$log.debug('deleteSpot');
 		return deleteSpot(spotName);
 	};
+
+	api.deleteSpotMeasure = function (spotName, measure) {
+		$log.debug('addMeasure');
+		return api.getSpotByName(spotName).then(function (spot) {
+			var i, l, indexToRemove;
+			for (i = 0, l = spot.measures.length; i < l; i++) {
+				if (spot.measures[i].timestamp === measure.timestamp) {
+					indexToRemove = i;
+				}
+			}
+			spot.measures.splice(indexToRemove, 1);
+			return spot;
+		});
+	};
+
 
 	return api;
 });

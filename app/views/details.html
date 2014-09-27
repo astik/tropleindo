@@ -1,5 +1,10 @@
 <h1>Details for {{spot.spotName}}</h1>
 
+<a data-ng-href="#/" class="btn btn-primary">
+    <span class="glyphicon glyphicon-home"></span>
+    Back to home
+</a>
+
 <div
         data-ac-chart="'bar'"
         data-ac-data="graphInfo.data"
@@ -12,18 +17,49 @@
     <tr>
         <th>Date</th>
         <th>Measure</th>
+        <th>Edit</th>
     </tr>
     </thead>
     <tbody>
     <tr data-ng-repeat="measure in spot.measures">
-        <th>
-            {{measure.timestamp | date:'dd/MM/yyyy HH:mm'}}
-        </th>
         <td>
-            {{measure.value}}%
+            <span data-ng-if="!measure.isEditing">
+                {{measure.timestamp | date:'dd/MM/yyyy HH:mm'}}
+            </span>
+            <div class="form-group form-group-sm" data-ng-if="measure.isEditing">
+                <label class="sr-only" for="newTimestamp">New measure</label>
+                <input type="text" class="form-control" id="newTimestamp" placeholder="xx"
+                       data-ng-model="measure.newTimestamp" min="0" max="100" required>
+            </div>
+        </td>
+        <td>
+            <span data-ng-if="!measure.isEditing">
+                {{measure.value}}%
+            </span>
+            <div class="form-group form-group-sm" data-ng-if="measure.isEditing">
+                <label class="sr-only" for="newValue">New measure</label>
+                <input type="number" class="form-control" id="newValue" placeholder="xx"
+                       data-ng-model="measure.newValue" min="0" max="100" required>
+            </div>
+        </td>
+        <td>
+            <div class="btn-group">
+                <button data-ng-click="save(measure)" class="btn btn-danger btn-sm" data-ng-if="measure.newTimestamp">
+                    <span class="glyphicon glyphicon-floppy-save"></span>
+                </button>
+                <button data-ng-click="cancel(measure)" class="btn btn-primary btn-sm"
+                        data-ng-if="measure.newTimestamp">
+                    <span class="glyphicon glyphicon-backward"></span>
+                </button>
+                <button data-ng-click="edit(measure)" class="btn btn-primary btn-sm" data-ng-if="!measure.newTimestamp">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </button>
+                <button data-ng-click="deleteSpotMeasure(spot, measure)" class="btn btn-sm btn-danger"
+                        data-ng-if="!measure.newTimestamp">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
         </td>
     </tr>
     </tbody>
 </table>
-
-<a data-ng-href="#/" class="btn btn-primary">Back to home</a>

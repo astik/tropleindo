@@ -7,7 +7,7 @@ angular.module('tropleindoApp').controller('MainCtrl', function ($scope, $window
 
 	$scope.addMeasure = function (spot) {
 		if (spot.newMeasure) {
-			measureService.addMeasure(spot.spotName, spot.newMeasure);
+			measureService.addSpotMeasure(spot.spotName, spot.newMeasure);
 		}
 	};
 
