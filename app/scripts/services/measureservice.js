@@ -1,17 +1,25 @@
 'use strict';
 
-angular.module('tropleindoApp').factory('measureService', function ($http, $log, $localStorage, $q) {
+angular.module('tropleindoApp').factory('measureService', function ($http, $log, $filter, $localStorage, $q) {
 	var storage = $localStorage.$default({
 		measures: []
 	});
 	var measures = storage.measures;
 
-	var retrieveMeasures = function () {
-		$log.debug('retrieveMeasures');
+	var retrievedMeasures = (function () {
+		$log.debug('retrievedMeasures');
 		var deferred = $q.defer();
+
+		var i, l, spot;
+		var orderBy = $filter('orderBy');
+		for (i = 0, l = measures.length; i < l; i++) {
+			spot = measures[i];
+			spot.measures = orderBy(spot.measures, 'timestamp', false);
+		}
+
 		deferred.resolve(measures);
 		return deferred.promise;
-	};
+	}());
 
 	var deleteSpot = function (spotName) {
 		$log.debug('deleteSpot');
@@ -32,12 +40,12 @@ angular.module('tropleindoApp').factory('measureService', function ($http, $log,
 
 	api.getAllMeasures = function () {
 		$log.debug('getAllMeasures');
-		return retrieveMeasures();
+		return retrievedMeasures;
 	};
 
 	api.getSpotByName = function (spotName) {
 		$log.debug('getSpotByName');
-		return retrieveMeasures().then(function (spotList) {
+		return retrievedMeasures.then(function (spotList) {
 			var i, l, spot;
 			for (i = 0, l = spotList.length; i < l; i++) {
 				spot = spotList[i];
@@ -60,7 +68,7 @@ angular.module('tropleindoApp').factory('measureService', function ($http, $log,
 				}
 			]
 		};
-		return retrieveMeasures().then(function (spotList) {
+		return retrievedMeasures.then(function (spotList) {
 			spotList.push(spotToInsert);
 			return spotList;
 		});
