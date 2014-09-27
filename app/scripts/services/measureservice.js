@@ -56,8 +56,8 @@ angular.module('tropleindoApp').factory('measureService', function ($http, $log)
 			spotName: newSpot.spotName,
 			measures: [
 				{
-					"timestamp": (new Date()).getTime(),
-					"value": newSpot.firstMeasure
+					timestamp: (new Date()).getTime(),
+					value: newSpot.firstMeasure
 				}
 			]
 		};
@@ -71,8 +71,8 @@ angular.module('tropleindoApp').factory('measureService', function ($http, $log)
 		$log.debug('addMeasure');
 		return api.getSpotByName(spotName).then(function (spot) {
 			spot.measures.push({
-					"timestamp": (new Date()).getTime(),
-					"value": measure
+					timestamp: (new Date()).getTime(),
+					value: measure
 				}
 			);
 			return spot;

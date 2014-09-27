@@ -15,7 +15,7 @@ angular.module('tropleindoApp').controller('DetailsCtrl', function ($scope, $rou
 				x: dateFilter(measure.timestamp, 'dd/MM'),
 				y: [measure.value],
 				tooltip: dateFilter(measure.timestamp, 'dd/MM/yyyy hh:mm') + ' : ' + [measure.value] + '%'
-			})
+			});
 		}
 
 		$scope.graphInfo = {
