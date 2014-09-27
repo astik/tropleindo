@@ -8,11 +8,17 @@ angular.module('tropleindoApp', [
 ]);
 
 angular.module('tropleindoApp').config(function ($routeProvider) {
-	$routeProvider.when('/', {
-		templateUrl : 'views/main.html',
-		controller : 'MainCtrl'
-	})
-	.otherwise({
-		redirectTo : '/'
-	});
+	$routeProvider
+		.when('/', {
+			templateUrl: 'views/main.html',
+			controller: 'MainCtrl'
+		})
+		.when('/new', {
+			templateUrl: 'views/new.html',
+			controller: 'NewCtrl'
+		})
+		.otherwise({
+			redirectTo: '/'
+		})
+	;
 });

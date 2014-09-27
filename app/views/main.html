@@ -1,18 +1,43 @@
-<table class="table table-condensed table-bordered table-striped">
-	<thead>
-		<tr>
-			<th></th>
-			<th data-ng-repeat="measure in measures[0].measures">
-				{{measure.timestamp | date}}
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr data-ng-repeat="spot in measures">
-			<th>{{spot.spotName}}</th>
-			<td data-ng-repeat="measure in spot.measures">
-				{{measure.value}}%
-			</td>
-		</tr>
-	</tbody>
+<h1>Overview</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Sport name</th>
+        <th>Latest measure</th>
+        <th>Add a new measure</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="spot in measures">
+        <th>
+            {{spot.spotName}}
+        </th>
+        <td>
+            {{spot.measures[spot.measures.length - 1].value}}%
+            ({{spot.measures[spot.measures.length - 1].timestamp | date:'dd/MM/yyyy HH:mm'}})
+        </td>
+        <td>
+            <form class="form-inline" data-ng-submit="addMeasure(spot)">
+                <div class="form-group form-group-sm">
+                    <label class="sr-only" for="newMeasure{{$index}}">New measure</label>
+                    <input type="number" class="form-control" id="newMeasure{{$index}}" placeholder="xx"
+                           data-ng-model="spot.newMeasure" maxlength="2" min="0" max="100" required>
+                </div>
+                <button type="submit" class="btn btn-default btn-sm">Add measure</button>
+            </form>
+        </td>
+        <td>
+            <div class="btn-group">
+                <a data-ng-href="#/{{spot.spotName}}/details" class="btn btn-primary btn-lg">
+                    <span class="glyphicon glyphicon-signal"></span>
+                </a>
+                <button data-ng-click="deleteSpot(spot)" class="btn btn-lg btn-danger">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
+        </td>
+    </tr>
+    </tbody>
 </table>
+<a data-ng-href="#/new" class="btn btn-default">New spot</a>

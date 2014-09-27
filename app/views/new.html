@@ -1,0 +1,13 @@
+<h1>New spot</h1>
+<form data-ng-submit="createNewSpot(newSpot)">
+    <div class="form-group">
+        <label for="spotName">Spot name</label>
+        <input type="text" class="form-control" id="spotName" placeholder="Enter spot name" required data-ng-model="newSpot.spotName">
+    </div>
+    <div class="form-group">
+        <label for="firstMeasure">First measure</label>
+        <input type="number" class="form-control" id="firstMeasure" placeholder="Enter first measure" required min="0"
+               max="100" data-ng-model="newSpot.firstMeasure">
+    </div>
+    <button type="submit" class="btn btn-default">Create new spot</button>
+</form>
