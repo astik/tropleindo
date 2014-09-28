@@ -250,6 +250,12 @@ module.exports = function (grunt) {
 						cwd: '<%= yeoman.dist %>/images',
 						dest: '<%= yeoman.dist %>/images',
 						src: ['generated/*']
+					},
+					{
+						expand: true,
+						cwd: 'bower_components/bootstrap/',
+						dest: '<%= yeoman.dist %>',
+						src: ['fonts/*']
 					}
 				]
 			},
@@ -309,6 +315,29 @@ module.exports = function (grunt) {
 			options: {
 				npm: false
 			}
+		},
+		manifest: {
+			generate: {
+				options: {
+					basePath: 'dist',
+					cache: [],
+					network: [],
+					fallback: [],
+					exclude: [],
+					preferOnline: false,
+					verbose: true,
+					timestamp: true,
+					hash: true,
+					master: ['index.html']
+				},
+				src: [
+					'fonts/*',
+					'scripts/*',
+					'styles/*',
+					'views/*'
+				],
+				dest: 'dist/manifest.appcache'
+			}
 		}
 	});
 
@@ -350,7 +379,8 @@ module.exports = function (grunt) {
 		'uglify',
 		'rev',
 		'usemin',
-		'htmlmin'
+		'htmlmin',
+		'manifest'
 	]);
 
 	grunt.registerTask('default', [

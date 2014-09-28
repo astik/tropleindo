@@ -1,5 +1,5 @@
 <!doctype html>
-<html data-ng-app="tropleindoApp">
+<html data-ng-app="tropleindoApp" manifest="manifest.appcache">
 <head>
 
     <meta charset="utf-8"/>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="styles/bootstrap.css" media="screen"/>
     <!-- endbuild -->
 
-    <!-- build:css(app) styles/modules.css -->
+    <!-- build:css(bower_components) styles/modules.css -->
     <link rel="stylesheet" href="angular-datepicker/dist/index.css" media="screen" />
     <!-- endbuild -->
 
@@ -25,7 +25,7 @@
 
 <div data-ng-view class="container"></div>
 
-<!-- build:js(app) scripts/modules.js -->
+<!-- build:js(bower_components) scripts/modules.js -->
 <script src="d3/d3.min.js"></script>
 <script src="jquery/dist/jquery.min.js"></script>
 <script src="angular/angular.min.js"></script>
