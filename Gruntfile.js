@@ -144,10 +144,9 @@ module.exports = function (grunt) {
 			dist: {
 				files: {
 					src: [
-						'<%= yeoman.dist %>/scripts/{,*/}*.js',
-						'<%= yeoman.dist %>/styles/{,*/}*.css',
-						'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-						'<%= yeoman.dist %>/styles/fonts/*'
+						'<%= yeoman.dist %>/scripts/*.js',
+						'<%= yeoman.dist %>/styles/*.css',
+						'<%= yeoman.dist %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg,ico}'
 					]
 				}
 			}
@@ -237,11 +236,10 @@ module.exports = function (grunt) {
 						cwd: '<%= yeoman.app %>',
 						dest: '<%= yeoman.dist %>',
 						src: [
-							'*.{ico,png,txt}',
 							'.htaccess',
 							'*.html',
 							'views/{,*/}*.html',
-							'images/{,*/}*.{webp}',
+							'img/{,*/}*.{ico,png}',
 							'fonts/*'
 						]
 					},
@@ -332,12 +330,19 @@ module.exports = function (grunt) {
 				},
 				src: [
 					'fonts/*',
+					'img/*',
 					'scripts/*',
 					'styles/*',
 					'views/*'
 				],
 				dest: 'dist/manifest.appcache'
 			}
+		},
+		'gh-pages': {
+			options: {
+				base: 'dist'
+			},
+			src: ['**']
 		}
 	});
 
@@ -387,5 +392,11 @@ module.exports = function (grunt) {
 		'jshint',
 		/*'test',*/
 		'build'
+	]);
+
+	grunt.registerTask('ghDeploy', [
+		'jshint',
+		'build',
+		'gh-pages'
 	]);
 };
